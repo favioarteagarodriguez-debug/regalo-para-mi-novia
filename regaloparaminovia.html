@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi princesa 💛</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background: radial-gradient(ellipse at bottom, #382052, #10091e 75%);
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  padding: 35px 18px;
+}
+
+h1 {
+  color: #ffe66d;
+  font-size: clamp(30px, 8vw, 48px);
+  text-shadow: 0 0 18px #ffbd35;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.garden {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 18px;
+  height: 220px;
+  margin: 25px auto;
+}
+
+.flower {
+  position: relative;
+  width: 85px;
+  height: 190px;
+  animation: sway 3s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+.flower:nth-child(2) {
+  animation-delay: -.8s;
+  height: 220px;
+}
+
+.flower:nth-child(3) {
+  animation-delay: -1.4s;
+}
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 41px;
+  width: 5px;
+  height: 105px;
+  background: #42b75a;
+  border-radius: 5px;
+}
+
+.leaf {
+  position: absolute;
+  bottom: 55px;
+  left: 43px;
+  width: 28px;
+  height: 13px;
+  background: #42b75a;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(-25deg);
+}
+
+.head {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 62px;
+  height: 62px;
+  animation: turn 15s linear infinite;
+}
+
+.petal {
+  position: absolute;
+  left: 21px;
+  top: 0;
+  width: 20px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffdf39;
+  transform-origin: 10px 31px;
+}
+
+.center {
+  position: absolute;
+  width: 27px;
+  height: 27px;
+  left: 17px;
+  top: 17px;
+  border-radius: 50%;
+  background: #7c3d13;
+  border: 3px solid #b46a20;
+}
+
+@keyframes sway {
+  from { transform: rotate(-7deg); }
+  to { transform: rotate(7deg); }
+}
+
+@keyframes turn {
+  to { transform: rotate(360deg); }
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 22px;
+  margin: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #ffe66d;
+  color: #392044;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#letter {
+  display: none;
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 22px;
+  background: #ffffff14;
+  border: 1px solid #ffe66d80;
+  border-radius: 20px;
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  z-index: 1;
+  animation: floatUp 7s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+footer {
+  padding: 20px;
+  color: #e8d8ff;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+<main>
+  <h1>Para ti, mi princesa 💛</h1>
+
+  <p>
+    Hice este pequeño universo<br>
+    para alguien muy especial: tú. ✨
+  </p>
+
+  <div class="garden" id="garden"></div>
+
+  <p>
+    Aunque estas flores sean digitales,<br>
+    el cariño con el que las hice es real. 🌻
+  </p>
+
+  <button onclick="openLetter()">
+    💌 Abre tu cartita
+  </button>
+
+  <div id="letter">
+    <h2>Para ti, mi amor ❤️</h2>
+    <p>
+      Quiero recordarte lo especial que eres para mí.
+      Espero que estas florecitas te saquen una sonrisa
+      y te recuerden que alguien pensó en ti al crear esto.
+    </p>
+    <p>Con mucho cariño, para ti. 💛</p>
+  </div>
+
+  <button onclick="makeHearts()">
+    💖 Llenar de corazones
+  </button>
+</main>
+
+<footer>Hecho especialmente para ti, con cariño. 🌻</footer>
+
+<script>
+const garden = document.getElementById("garden");
+
+for (let i = 0; i < 3; i++) {
+  const flower = document.createElement("div");
+  flower.className = "flower";
+
+  const head = document.createElement("div");
+  head.className = "head";
+
+  for (let j = 0; j < 10; j++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.transform = `rotate(${j * 36}deg)`;
+    head.appendChild(petal);
+  }
+
+  const center = document.createElement("div");
+  center.className = "center";
+  head.appendChild(center);
+
+  const stem = document.createElement("div");
+  stem.className = "stem";
+
+  const leaf = document.createElement("div");
+  leaf.className = "leaf";
+
+  flower.append(head, stem, leaf);
+  garden.appendChild(flower);
+}
+
+function openLetter() {
+  const letter = document.getElementById("letter");
+  letter.style.display = "block";
+  letter.scrollIntoView({ behavior: "smooth", block: "center" });
+  makeHearts();
+}
+
+function makeHearts() {
+  const symbols = ["💛", "💖", "💕", "🌻", "✨"];
+
+  for (let i = 0; i < 24; i++) {
+    const heart = document.createElement("span");
+    heart.className = "heart";
+    heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDelay = Math.random() * 2 + "s";
+    heart.style.fontSize = (18 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+  }
+}
+</script>
+</body>
+</html>
